@@ -1,4 +1,7 @@
 {
   "extends": "@chat-sdk/tsconfig/node.json",
+  "compilerOptions": {
+    "outDir": "./dist"
+  },
   "include": ["src"]
 }
