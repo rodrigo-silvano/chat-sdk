@@ -1,3 +1,4 @@
+import './env.js';
 import { createDatabase } from '@chat-sdk/database';
 
 if (!process.env.DATABASE_URL) {
