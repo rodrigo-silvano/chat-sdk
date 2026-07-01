@@ -306,18 +306,33 @@ export default function AgentSettings() {
                     <>
                       <option value="gpt-4o-mini">gpt-4o-mini</option>
                       <option value="gpt-4o">gpt-4o</option>
+                      <option value="o3-mini">o3-mini</option>
+                      <option value="o1">o1</option>
                       <option value="o1-mini">o1-mini</option>
+                      <option value="o1-preview">o1-preview</option>
+                      <option value="gpt-4-turbo">gpt-4-turbo</option>
+                      <option value="gpt-4">gpt-4</option>
+                      <option value="gpt-3.5-turbo">gpt-3.5-turbo</option>
                     </>
                   )}
                   {provider === 'anthropic' && (
                     <>
                       <option value="claude-3-5-sonnet-latest">claude-3-5-sonnet-latest</option>
                       <option value="claude-3-5-haiku-latest">claude-3-5-haiku-latest</option>
-                      <option value="claude-3-opus-20240229">claude-3-opus</option>
+                      <option value="claude-3-opus-latest">claude-3-opus-latest</option>
+                      <option value="claude-3-5-sonnet-20241022">claude-3-5-sonnet-20241022</option>
+                      <option value="claude-3-5-sonnet-20240620">claude-3-5-sonnet-20240620</option>
+                      <option value="claude-3-opus-20240229">claude-3-opus-20240229</option>
+                      <option value="claude-3-sonnet-20240229">claude-3-sonnet-20240229</option>
+                      <option value="claude-3-haiku-20240307">claude-3-haiku-20240307</option>
                     </>
                   )}
                   {provider === 'google' && (
                     <>
+                      <option value="gemini-2.5-flash">gemini-2.5-flash</option>
+                      <option value="gemini-2.5-pro">gemini-2.5-pro</option>
+                      <option value="gemini-2.0-flash">gemini-2.0-flash</option>
+                      <option value="gemini-2.0-flash-lite">gemini-2.0-flash-lite</option>
                       <option value="gemini-1.5-flash">gemini-1.5-flash</option>
                       <option value="gemini-1.5-pro">gemini-1.5-pro</option>
                     </>
