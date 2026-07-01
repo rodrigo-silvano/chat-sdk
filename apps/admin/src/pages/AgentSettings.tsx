@@ -249,6 +249,33 @@ export default function AgentSettings() {
               />
             </div>
 
+            {selectedAgent && (
+              <div className="form-group">
+                <label className="input-label" htmlFor="agent-id">ID do Agente (usado no script de integração)</label>
+                <div style={{ display: 'flex', gap: '10px' }}>
+                  <input
+                    id="agent-id"
+                    type="text"
+                    className="input-field"
+                    value={selectedAgent.id}
+                    readOnly
+                    style={{ fontFamily: 'monospace', fontSize: '0.85rem', background: 'rgba(255, 255, 255, 0.05)', color: '#8b949e' }}
+                  />
+                  <button
+                    type="button"
+                    className="glow-btn"
+                    style={{ height: '40px', padding: '0 16px' }}
+                    onClick={() => {
+                      navigator.clipboard.writeText(selectedAgent.id);
+                      alert('ID do agente copiado para a área de transferência!');
+                    }}
+                  >
+                    <span>Copiar</span>
+                  </button>
+                </div>
+              </div>
+            )}
+
             <div className="form-group">
               <label className="input-label" htmlFor="greeting-msg">Mensagem de Boas-vindas</label>
               <input
