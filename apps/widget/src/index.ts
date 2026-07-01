@@ -5,7 +5,8 @@ import widgetStyles from './styles/widget.css?inline';
 
 interface ChatWidgetOptions {
   agentId: string;
-  baseUrl: string;
+  baseUrl?: string;
+  apiUrl?: string;
   title?: string;
   welcomeMessage?: string;
   quickReplies?: string[];
@@ -30,10 +31,12 @@ function init(options: ChatWidgetOptions) {
   const mountPoint = document.createElement('div');
   shadowRoot.appendChild(mountPoint);
 
+  const baseUrl = options.baseUrl || options.apiUrl || 'http://localhost:3000';
+
   render(
     h(ChatWindow, {
       agentId: options.agentId,
-      baseUrl: options.baseUrl,
+      baseUrl: baseUrl,
       title: options.title,
       welcomeMessage: options.welcomeMessage,
       quickReplies: options.quickReplies,
