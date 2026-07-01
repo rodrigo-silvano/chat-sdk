@@ -1,0 +1,4 @@
+{
+  "extends": "@chat-sdk/tsconfig/node.json",
+  "include": ["src"]
+}

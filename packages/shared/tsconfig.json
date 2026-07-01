@@ -1,0 +1,7 @@
+{
+  "extends": "@chat-sdk/tsconfig/base.json",
+  "compilerOptions": {
+    "noEmit": true
+  },
+  "include": ["src"]
+}
