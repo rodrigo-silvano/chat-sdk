@@ -1,0 +1,21 @@
+{
+  "name": "@chat-sdk/widget",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build && vite build --config vite.loader.config.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@chat-sdk/shared": "workspace:*",
+    "preact": "^10.22.0"
+  },
+  "devDependencies": {
+    "@chat-sdk/tsconfig": "workspace:*",
+    "@preact/preset-vite": "^2.8.2",
+    "typescript": "^5.7.0",
+    "vite": "^5.2.0"
+  }
+}

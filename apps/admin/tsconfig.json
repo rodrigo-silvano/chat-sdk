@@ -1,0 +1,11 @@
+{
+  "extends": "@chat-sdk/tsconfig/react.json",
+  "compilerOptions": {
+    "noEmit": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"]
+    }
+  },
+  "include": ["src", "vite.config.ts"]
+}

@@ -1,0 +1,13 @@
+:host {
+  --chat-primary: #818cf8;
+  --chat-primary-hover: #6366f1;
+  --chat-bg: rgba(17, 24, 39, 0.85);
+  --chat-text: #f3f4f6;
+  --chat-text-muted: #9ca3af;
+  --chat-border: rgba(255, 255, 255, 0.08);
+  --chat-glass-blur: 16px;
+  --chat-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.5), 0 8px 10px -6px rgb(0 0 0 / 0.5);
+  --chat-bubble-user: #4f46e5;
+  --chat-bubble-agent: rgba(255, 255, 255, 0.06);
+  --chat-font: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+}
