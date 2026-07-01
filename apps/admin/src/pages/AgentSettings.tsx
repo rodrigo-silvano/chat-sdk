@@ -26,7 +26,7 @@ export default function AgentSettings() {
   const [greetingMessage, setGreetingMessage] = useState('');
   const [systemPrompt, setSystemPrompt] = useState('');
   const [provider, setProvider] = useState<'openai' | 'anthropic' | 'google'>('openai');
-  const [model, setModel] = useState('gpt-4o-mini');
+  const [model, setModel] = useState('gpt-5.4-mini');
   const [temperature, setTemperature] = useState(0.7);
   const [maxTokens, setMaxTokens] = useState(2048);
 
@@ -69,11 +69,11 @@ export default function AgentSettings() {
 
   useEffect(() => {
     if (provider === 'openai') {
-      setModel('gpt-4o-mini');
+      setModel('gpt-5.4-mini');
     } else if (provider === 'anthropic') {
-      setModel('claude-3-5-sonnet-latest');
+      setModel('claude-sonnet-5');
     } else if (provider === 'google') {
-      setModel('gemini-1.5-flash');
+      setModel('gemini-3.5-flash');
     }
   }, [provider]);
 
@@ -83,7 +83,7 @@ export default function AgentSettings() {
     setGreetingMessage('Olá! Como posso ajudar hoje?');
     setSystemPrompt('Tu és um assistente útil e profissional.');
     setProvider('openai');
-    setModel('gpt-4o-mini');
+    setModel('gpt-5.4-mini');
     setTemperature(0.7);
     setMaxTokens(2048);
   };
@@ -304,37 +304,31 @@ export default function AgentSettings() {
                 >
                   {provider === 'openai' && (
                     <>
-                      <option value="gpt-4o-mini">gpt-4o-mini</option>
+                      <option value="gpt-5.5">gpt-5.5</option>
+                      <option value="gpt-5.4-pro">gpt-5.4-pro</option>
+                      <option value="gpt-5.4-mini">gpt-5.4-mini</option>
+                      <option value="gpt-5.4-nano">gpt-5.4-nano</option>
                       <option value="gpt-4o">gpt-4o</option>
-                      <option value="o3-mini">o3-mini</option>
-                      <option value="o1">o1</option>
-                      <option value="o1-mini">o1-mini</option>
-                      <option value="o1-preview">o1-preview</option>
-                      <option value="gpt-4-turbo">gpt-4-turbo</option>
-                      <option value="gpt-4">gpt-4</option>
-                      <option value="gpt-3.5-turbo">gpt-3.5-turbo</option>
+                      <option value="gpt-4o-mini">gpt-4o-mini</option>
                     </>
                   )}
                   {provider === 'anthropic' && (
                     <>
+                      <option value="claude-sonnet-5">claude-sonnet-5</option>
+                      <option value="claude-fable-5">claude-fable-5</option>
+                      <option value="claude-opus-4-8">claude-opus-4-8</option>
+                      <option value="claude-haiku-4-5">claude-haiku-4-5</option>
                       <option value="claude-3-5-sonnet-latest">claude-3-5-sonnet-latest</option>
-                      <option value="claude-3-5-haiku-latest">claude-3-5-haiku-latest</option>
-                      <option value="claude-3-opus-latest">claude-3-opus-latest</option>
-                      <option value="claude-3-5-sonnet-20241022">claude-3-5-sonnet-20241022</option>
-                      <option value="claude-3-5-sonnet-20240620">claude-3-5-sonnet-20240620</option>
-                      <option value="claude-3-opus-20240229">claude-3-opus-20240229</option>
-                      <option value="claude-3-sonnet-20240229">claude-3-sonnet-20240229</option>
-                      <option value="claude-3-haiku-20240307">claude-3-haiku-20240307</option>
                     </>
                   )}
                   {provider === 'google' && (
                     <>
-                      <option value="gemini-2.5-flash">gemini-2.5-flash</option>
+                      <option value="gemini-3.5-pro">gemini-3.5-pro</option>
+                      <option value="gemini-3.5-flash">gemini-3.5-flash</option>
+                      <option value="gemini-3.1-pro">gemini-3.1-pro</option>
+                      <option value="gemini-3.1-flash-lite">gemini-3.1-flash-lite</option>
                       <option value="gemini-2.5-pro">gemini-2.5-pro</option>
-                      <option value="gemini-2.0-flash">gemini-2.0-flash</option>
-                      <option value="gemini-2.0-flash-lite">gemini-2.0-flash-lite</option>
-                      <option value="gemini-1.5-flash">gemini-1.5-flash</option>
-                      <option value="gemini-1.5-pro">gemini-1.5-pro</option>
+                      <option value="gemini-2.5-flash">gemini-2.5-flash</option>
                     </>
                   )}
                 </select>
