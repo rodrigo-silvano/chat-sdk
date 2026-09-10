@@ -36,10 +36,13 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '22'
-          cache: 'pnpm'
+          cache: 'npm'
 
       - name: Install pnpm globally
         run: npm install -g pnpm@9.15.0
+
+      - name: Add pnpm to PATH
+        run: echo "$HOME/.npm-global/bin" >> $GITHUB_PATH
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
