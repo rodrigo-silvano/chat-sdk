@@ -1,0 +1,72 @@
+{
+  "root": true,
+  "env": {
+    "node": true,
+    "es2024": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:prettier/recommended"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": "latest",
+    "sourceType": "module",
+    "project": ["./tsconfig.json", "./apps/*/tsconfig.json", "./packages/*/tsconfig.json"]
+  },
+  "plugins": ["@typescript-eslint", "prettier"],
+  "ignorePatterns": [
+    "dist",
+    "node_modules",
+    "*.js",
+    "*.d.ts",
+    "pnpm-lock.yaml",
+    "package-lock.json"
+  ],
+  "rules": {
+    "@typescript-eslint/explicit-function-return-type": "off",
+    "@typescript-eslint/no-unused-vars": ["warn", { "argsIgnorePattern": "^_" }],
+    "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/prefer-nullish-coalescing": "off",
+    "@typescript-eslint/prefer-optional-chain": "error",
+    "@typescript-eslint/prefer-readonly": "warn",
+    "@typescript-eslint/no-floating-promises": "off",
+    "@typescript-eslint/no-misused-promises": "off",
+    "@typescript-eslint/await-thenable": "off",
+    "@typescript-eslint/no-var-requires": "warn",
+    "@typescript-eslint/prefer-as-const": "warn",
+    "@typescript-eslint/no-unsafe-assignment": "off",
+    "@typescript-eslint/no-unsafe-argument": "off",
+    "@typescript-eslint/no-unsafe-member-access": "off",
+    "@typescript-eslint/no-unsafe-call": "off",
+    "@typescript-eslint/no-unsafe-return": "off",
+    "@typescript-eslint/no-unused-expressions": "off",
+    "no-console": "off",
+    "prefer-const": "error",
+    "no-var": "error",
+    "eqeqeq": ["error", "always"],
+    "no-empty": "off",
+    "no-constant-condition": "off",
+    "no-implicit-coercion": "error",
+    "no-param-reassign": "error",
+    "no-plusplus": "error",
+    "no-return-assign": "error",
+    "no-self-compare": "error",
+    "no-sequences": "error",
+    "no-throw-literal": "error",
+    "no-unmodified-loop-condition": "error",
+    "no-unneeded-ternary": "error",
+    "no-useless-call": "error",
+    "no-useless-computed-key": "error",
+    "no-useless-constructor": "error",
+    "no-useless-rename": "error",
+    "no-useless-return": "error",
+    "prefer-object-spread": "error",
+    "prefer-promise-reject-errors": "error",
+    "require-await": "off",
+    "symbol-description": "error",
+    "yoda": "error",
+    "prettier/prettier": ["error", { "endOfLine": "auto" }]
+  }
+}
