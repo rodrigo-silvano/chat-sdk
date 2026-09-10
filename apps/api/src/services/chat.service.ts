@@ -69,7 +69,8 @@ export class ChatService {
   }
 
   async getConversation(id: string, includeDeleted: boolean = false): Promise<Conversation | null> {
-    let query = db.select().from(conversations).where(eq(conversations.id, id)).limit(1);
+    let query = db.select().from(conversations).$dynamic()
+      .where(eq(conversations.id, id)).limit(1);
     
     if (!includeDeleted) {
       query = query.where(eq(conversations.isDeleted, false));
@@ -99,7 +100,7 @@ export class ChatService {
   async getMessages(conversationId: string, includeDeleted: boolean = false): Promise<ChatMessage[]> {
     let query = db
       .select()
-      .from(messages)
+      .from(messages).$dynamic()
       .where(eq(messages.conversationId, conversationId));
 
     if (!includeDeleted) {

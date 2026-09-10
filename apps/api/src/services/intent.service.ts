@@ -18,20 +18,26 @@ Classify the user's latest message into one of these labels:
 
 Respond with exactly one word from this list: human_handover, frustration, general. Do not include any other text or formatting.`;
 
+      const messages = [
+        ...history.slice(-5),
+        {
+          id: 'temp-intent',
+          conversationId: 'temp',
+          role: 'user' as const,
+          content: latestMessage,
+          senderType: 'user' as const,
+          feedback: null,
+          isDeleted: false,
+          deletedAt: null,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+      ];
+
       const params = {
         model,
         systemPrompt,
-        messages: [
-          ...history.slice(-5),
-          {
-            id: 'temp-intent',
-            conversationId: 'temp',
-            role: 'user' as const,
-            content: latestMessage,
-            senderType: 'user' as const,
-            createdAt: new Date(),
-          },
-        ],
+        messages,
         temperature: 0,
         maxTokens: 10,
       };

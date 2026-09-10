@@ -3,7 +3,7 @@ import { AuthService } from '../services/auth.service.js';
 
 const authService = new AuthService();
 
-interface RequestUser {
+export interface RequestUser {
   id: string;
   email: string;
   role: string;

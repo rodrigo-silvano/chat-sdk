@@ -36,11 +36,8 @@ export function initSocketServer(httpServer: any) {
     console.error('Redis subClient error:', err);
   });
 
-  io.adapter(createAdapter(pubClient, subClient))
-    .catch((err) => {
-      console.error('Failed to create Redis adapter:', err);
-      process.exit(1);
-    });
+  const adapter = createAdapter(pubClient, subClient);
+  io.adapter(adapter);
 
   io.on('connection', (socket) => {
     socket.on('join_conversation', (conversationId: string) => {

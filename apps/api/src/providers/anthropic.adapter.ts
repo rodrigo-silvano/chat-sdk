@@ -14,7 +14,7 @@ export class AnthropicAdapter implements LLMAdapterInterface {
         .filter((m) => m.role !== 'system')
         .map((m) => ({
           role: m.role === 'assistant' ? 'assistant' as const : 'user' as const,
-          content: m.content,
+          content: m.content || '',
         }));
 
       const stream = await this.anthropic.messages.create({
