@@ -37,10 +37,11 @@ jobs:
         with:
           node-version: '22'
           cache: 'pnpm'
-          corepack: true
+        env:
+          ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION: true
 
-      - name: Enable pnpm
-        run: corepack prepare pnpm@9.15.0 --activate
+      - name: Install pnpm
+        run: npm install -g pnpm@9.15.0
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
