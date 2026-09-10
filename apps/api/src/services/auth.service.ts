@@ -7,7 +7,15 @@ import { operators } from '@chat-sdk/database';
 import { eq } from 'drizzle-orm';
 import type { RegisterInput, LoginInput, Operator } from '@chat-sdk/shared';
 
-const JWT_SECRET = process.env.JWT_SECRET || 'default-chat-sdk-jwt-secret';
+if (!process.env.JWT_SECRET || process.env.JWT_SECRET.length < 32) {
+  throw new Error('JWT_SECRET must be at least 32 characters long');
+}
+if (!process.env.JWT_REFRESH_SECRET || process.env.JWT_REFRESH_SECRET.length < 32) {
+  throw new Error('JWT_REFRESH_SECRET must be at least 32 characters long');
+}
+
+const JWT_SECRET = process.env.JWT_SECRET;
+const JWT_REFRESH_SECRET = process.env.JWT_REFRESH_SECRET;
 
 export class AuthService {
   async register(input: RegisterInput): Promise<Operator> {
@@ -66,12 +74,13 @@ export class AuthService {
       updatedAt: operatorRecord.updatedAt,
     };
 
+    const is2FaVerified = !operatorRecord.totpEnabled;
     const token = jwt.sign(
       {
         id: operator.id,
         email: operator.email,
         role: operator.role,
-        is2FaVerified: !operator.totpEnabled,
+        is2FaVerified,
       },
       JWT_SECRET,
       { expiresIn: '24h' }
@@ -116,7 +125,7 @@ export class AuthService {
     };
   }
 
-  async verify2Fa(operatorId: string, token: string): Promise<{ token: string }> {
+  async verify2Fa(operatorId: string, code: string): Promise<{ token: string }> {
     const records = await db.select().from(operators).where(eq(operators.id, operatorId)).limit(1);
     const operatorRecord = records[0];
 
@@ -133,9 +142,9 @@ export class AuthService {
       secret: OTPAuth.Secret.fromBase32(operatorRecord.totpSecret),
     });
 
-    const delta = totp.validate({ token, window: 1 });
+    const delta = totp.validate({ token: code, window: 1 });
     if (delta === null) {
-      throw new Error('Invalid code');
+      throw new Error('Invalid 2FA code');
     }
 
     await db.update(operators).set({
@@ -157,7 +166,39 @@ export class AuthService {
     return { token: jwtToken };
   }
 
-  verifyToken(token: string): any {
-    return jwt.verify(token, JWT_SECRET);
+  verifyToken(token: string): { id: string; email: string; role: string; is2FaVerified: boolean } {
+    const decoded = jwt.verify(token, JWT_SECRET) as {
+      id: string;
+      email: string;
+      role: string;
+      is2FaVerified: boolean;
+    };
+    return decoded;
+  }
+
+  generateRefreshToken(operatorId: string, email: string, role: string): string {
+    return jwt.sign(
+      {
+        id: operatorId,
+        email,
+        role,
+        type: 'refresh',
+      },
+      JWT_REFRESH_SECRET,
+      { expiresIn: '7d' }
+    );
+  }
+
+  verifyRefreshToken(token: string): { id: string; email: string; role: string; type: string } {
+    const decoded = jwt.verify(token, JWT_REFRESH_SECRET) as {
+      id: string;
+      email: string;
+      role: string;
+      type: string;
+    };
+    if (decoded.type !== 'refresh') {
+      throw new Error('Invalid refresh token');
+    }
+    return decoded;
   }
 }

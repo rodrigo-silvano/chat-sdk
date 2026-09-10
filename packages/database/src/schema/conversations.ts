@@ -14,4 +14,7 @@ export const conversations = pgTable('conversations', {
 }, (table) => ([
   index('conversations_session_id_idx').on(table.sessionId),
   index('conversations_status_idx').on(table.status),
+  index('conversations_agent_id_idx').on(table.agentId),
+  index('conversations_assigned_operator_id_idx').on(table.assignedOperatorId),
+  index('conversations_created_at_idx').on(table.createdAt),
 ]));

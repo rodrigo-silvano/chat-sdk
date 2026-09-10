@@ -11,4 +11,6 @@ export const messages = pgTable('messages', {
   createdAt: timestamp('created_at').notNull().defaultNow(),
 }, (table) => ([
   index('messages_conversation_id_idx').on(table.conversationId),
+  index('messages_created_at_idx').on(table.createdAt),
+  index('messages_conversation_created_idx').on(table.conversationId, table.createdAt),
 ]));
