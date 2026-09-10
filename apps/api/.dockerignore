@@ -1,0 +1,13 @@
+node_modules
+npm-cache
+pnpm-lock.yaml
+Dockerfile
+.dockerignore
+.git
+.gitignore
+.env
+.env.*
+*.md
+*.log
+dist
+build
