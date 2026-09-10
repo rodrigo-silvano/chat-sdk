@@ -42,7 +42,7 @@ jobs:
         run: corepack enable
 
       - name: Install pnpm
-        run: corepack prepare pnpm@latest --activate
+        run: corepack prepare pnpm@9.15.0 --activate
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
@@ -61,6 +61,7 @@ jobs:
           JWT_SECRET: test_jwt_secret_1234567890abcdef1234567890abcdef
           JWT_REFRESH_SECRET: test_refresh_secret_1234567890abcdef1234567890abcdef
           ENCRYPTION_KEY: test_encryption_key_1234567890abcdef1234567890ab
+          NODE_ENV: test
 
   docker-build:
     name: Docker Build
