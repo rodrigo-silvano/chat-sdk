@@ -37,10 +37,8 @@ jobs:
         with:
           node-version: '22'
           cache: 'pnpm'
-        env:
-          ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION: true
 
-      - name: Install pnpm
+      - name: Install pnpm globally
         run: npm install -g pnpm@9.15.0
 
       - name: Install dependencies
@@ -61,6 +59,7 @@ jobs:
           JWT_REFRESH_SECRET: test_refresh_secret_1234567890abcdef1234567890abcdef
           ENCRYPTION_KEY: test_encryption_key_1234567890abcdef1234567890ab
           NODE_ENV: test
+          PORT: 3000
 
   docker-build:
     name: Docker Build
