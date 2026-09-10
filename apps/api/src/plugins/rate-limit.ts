@@ -21,11 +21,20 @@ export async function authRateLimitPlugin(fastify: FastifyInstance) {
     keyGenerator: (req) => {
       return req.ip;
     },
-    skip: (req) => {
-      return !req.url.startsWith('/api/auth');
+    addHeaders: {
+      'x-ratelimit-limit': '5',
+      'x-ratelimit-remaining': '0',
+      'x-ratelimit-reset': '60',
     },
     errorResponseBuilder: () => ({
       error: 'Too many authentication attempts, please try again later.',
     }),
+  });
+
+  fastify.addHook('onRoute', (routeOptions) => {
+    if (!routeOptions.url.startsWith('/api/auth')) {
+      return;
+    }
+    return;
   });
 }

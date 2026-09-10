@@ -28,8 +28,8 @@ await fastify.register(handoverRoutes, { prefix: '/api/handover' });
 await fastify.ready();
 initSocketServer(fastify.server);
 
-const PORT = parseInt(process.env.PORT, 10);
-const HOST = process.env.HOST || '0.0.0.0';
+const PORT = parseInt(process.env.PORT!, 10);
+const HOST = process.env.HOST!;
 
 if (isNaN(PORT)) {
   throw new Error('PORT must be a valid number');
