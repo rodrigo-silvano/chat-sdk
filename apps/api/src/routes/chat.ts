@@ -1,4 +1,5 @@
 import type { FastifyInstance } from 'fastify';
+import { z } from 'zod';
 import { db } from '../db.js';
 import { agents } from '@chat-sdk/database';
 import { eq } from 'drizzle-orm';
@@ -15,18 +16,21 @@ const intentService = new IntentService();
 const handoverService = new HandoverService();
 const memoryService = new MemoryService();
 
+const ChatInputSchema = z.object({
+  sessionId: z.string().min(1, 'sessionId is required'),
+  agentId: z.string().min(1, 'agentId is required'),
+  content: z.string().min(1, 'content is required'),
+});
+
 export async function chatRoutes(fastify: FastifyInstance) {
   fastify.post('/', async (request, reply) => {
-    const { sessionId, agentId, content } = request.body as {
-      sessionId?: string;
-      agentId?: string;
-      content?: string;
-    };
-
-    if (!sessionId || !agentId || !content) {
-      reply.code(400).send({ error: 'sessionId, agentId, and content are required' });
+    const result = ChatInputSchema.safeParse(request.body);
+    if (!result.success) {
+      reply.code(400).send({ error: result.error.errors.map((e) => e.message).join(', ') });
       return;
     }
+
+    const { sessionId, agentId, content } = result.data;
 
     try {
       const records = await db.select().from(agents).where(eq(agents.id, agentId)).limit(1);

@@ -12,7 +12,7 @@ export class OpenAIAdapter implements LLMAdapterInterface {
     try {
       const formattedMessages = params.messages.map((m) => ({
         role: m.role === 'operator' ? 'user' as const : (m.role === 'system' ? 'system' as const : (m.role === 'assistant' ? 'assistant' as const : 'user' as const)),
-        content: m.content,
+        content: m.content || '',
       }));
 
       const stream = await this.openai.chat.completions.create({

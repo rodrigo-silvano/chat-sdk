@@ -21,7 +21,7 @@ export class GoogleAdapter implements LLMAdapterInterface {
 
       const contents = params.messages.map((m) => ({
         role: m.role === 'assistant' ? 'model' : 'user',
-        parts: [{ text: m.content }],
+        parts: [{ text: m.content || '' }],
       }));
 
       const result = await model.generateContentStream({ contents });
